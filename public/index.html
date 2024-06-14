@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Landing Page</title>
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/modal.css">
 </head>
 <body>
   <header>
@@ -22,13 +23,27 @@
     <div class="hero-content">
       <h1>Welcome to Our Product</h1>
       <p>Your one-stop solution for all your needs.</p>
-      <a href="#signup" class="cta-btn">Sign Up Now</a>
+      <a href="#signup" id="openSignupModal" class="cta-btn">Sign Up Now</a>
     </div>
   </section>
-   
+  
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <section id="signup">
+        <h2>Sign Up</h2>
+        <form id="signupForm" action="/signup" method="post">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="password" name="password" placeholder="Your Password" required>
+          <button type="submit">Sign Up</button>
+        </form>
+      </section>
+    </div>
+  </div>
+
   <section id="features">
     <h2>Key Features</h2>
-    
     <div class="container">
       <div class="feature">
         <div class="face face1">
@@ -44,7 +59,6 @@
           </div>
         </div>
       </div>
-  
       <div class="feature">
         <div class="face face1">
           <div class="content">
@@ -59,7 +73,6 @@
           </div>
         </div>
       </div>
-  
       <div class="feature">
         <div class="face face1">
           <div class="content">
@@ -75,9 +88,7 @@
         </div>
       </div>
     </div>
-    
   </section>
-
 
   <section id="pricing">
     <div class="banner">
@@ -206,7 +217,7 @@
     </div>
   </section>
 
-  <section id="signup">
+  <!-- <section id="signup">
     <h2>Sign Up</h2>
     <form action="/signup" method="post">
         <input type="text" name="name" placeholder="Your Name" required>
@@ -214,7 +225,7 @@
         <input type="password" name="password" placeholder="Your Password" required>
         <button type="submit">Sign Up</button>
     </form>
-</section>
+  </section> -->
 
   <section id="contact">
     <h2>Contact Us</h2>
@@ -232,5 +243,6 @@
   </footer>
   <script src="https://kit.fontawesome.com/95a02bd20d.js"></script>
   <script src="/script.js"></script>
+  <script src="/modal.js"></script>
 </body>
 </html>

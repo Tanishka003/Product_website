@@ -14,7 +14,7 @@ body {
 header {
   background-color: #333;
   color: #fff;
-  padding: 15px ;
+  padding: 20px ;
   text-align: right;
   margin-right: 0;
 }
@@ -39,7 +39,7 @@ a {
 }
 
 section {
-  padding: 80px 15px;
+  padding: 100px 20px;
   line-height: 1.5;
 }
 
