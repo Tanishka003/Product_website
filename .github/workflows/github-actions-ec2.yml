@@ -1,4 +1,4 @@
-name: Push-to-EC2
+name: Deploy to AWS EC2
 
 # Trigger deployment only on push to main branch
 on:
@@ -8,20 +8,22 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/aws_ec2.pem
+          chmod 600 ~/.ssh/aws_ec2.pem
+          ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2
+        run: |
+          rsync -avz --delete -e "ssh -i ~/.ssh/aws_ec2.pem -o StrictHostKeyChecking=no" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -34,7 +36,6 @@ jobs:
             sudo apt-get install -y apache2
             sudo systemctl start apache2
             sudo systemctl enable apache2
-            # Move contents to the web root directory
-            sudo mv /home/${{ secrets.USERNAME }}/your_project_directory/* /var/www/html/
+            sudo mv ${TARGET_DIR}/* /var/www/html/
             sudo chown -R www-data:www-data /var/www/html
             sudo systemctl restart apache2
