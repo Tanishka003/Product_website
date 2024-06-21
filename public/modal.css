@@ -2,7 +2,7 @@
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+     z-index: 2;  /*Sit on top */ 
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -13,11 +13,13 @@
   
   /* Modal Content */
   .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* 10% from the top and centered */
+    background-color: transparent;
+    /* border: rgba(204, 133, 133, 0.2);  */
+    backdrop-filter: blur(20px);
+    margin: 30px auto; /* 10% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    border: 2px solid #c9c9c9;
+    width: 90%; /* Could be more or less, depending on screen size */
     max-width: 600px;
   }
   
